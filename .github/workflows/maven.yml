@@ -24,17 +24,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-       - name: Setup JFrog CLI
-         uses: jfrog/setup-jfrog-cli@v3
-         env:  
-           JF_URL: ${{ env.JF_URL }}
-         with:
-           oidc-provider-name: ${{ env.OIDC_PROVIDER }}
-           oidc-audience: ${{ env.OIDC_AUDIENCE }}
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v3
+        env:  
+          JF_URL: ${{ env.JF_URL }}
+        with:
+          oidc-provider-name: ${{ env.OIDC_PROVIDER }}
+          oidc-audience: ${{ env.OIDC_AUDIENCE }}
 
-       - name: Set CLI Config
-         run: jf mvnc --global=true --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
-           
-       - name: Install Dependencies
-         run: jf mvn install
+      - name: Set CLI Config
+        run: jf mvnc --global=true --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
+          
+      - name: Install Dependencies
+        run: jf mvn install
            
