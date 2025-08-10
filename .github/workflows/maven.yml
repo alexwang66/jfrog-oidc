@@ -1,41 +1,46 @@
 name: "JFrog-GitHub NPM Publish OIDC Integration"
 on: push
 
-# This is required as per
-# https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-cloud-providers#adding-permissions-settings
 permissions:
   id-token: write
+  contents: read
 
 jobs:
   build:
-     runs-on: ubuntu-latest
-     env:
+    runs-on: ubuntu-latest
+    env:
       OIDC_AUDIENCE: 'jfrog-oidc'
       OIDC_PROVIDER: 'alex-github'
       PLATFORM_REPO: 'alex-libs-release'
+      # 从仓库密钥读取（值形如 https://demo.jfrogchina.com）
       JF_URL: ${{ secrets.JF_URL }}
-     defaults:
-      run:
-        working-directory: ./package
-     steps:
+
+    steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Setup JFrog CLI
+
+      - name: Setup JFrog CLI (OIDC)
         uses: jfrog/setup-jfrog-cli@v3
-        env:  
+        env:
           JF_URL: ${{ env.JF_URL }}
         with:
           oidc-provider-name: ${{ env.OIDC_PROVIDER }}
           oidc-audience: ${{ env.OIDC_AUDIENCE }}
 
-      - name: Set CLI Config
-        run: jf mvnc --global=true --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
-          
-      - name: Install Dependencies
-        run: jf mvn install
-           
+      # 这步生成全局 settings.xml，不需要在 ./package 下跑
+      - name: Configure Maven (global)
+        working-directory: .
+        run: |
+          jf mvnc --global=true --repo-resolve="$PLATFORM_REPO" --repo-deploy="$PLATFORM_REPO"
+
+      # 这步才在 ./package 下构建
+      - name: Build with Maven
+        run: |
+          jf mvn -version
+          jf mvn -B -U -DskipTests install
