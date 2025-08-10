@@ -44,8 +44,6 @@ jobs:
             --repo-resolve-snapshots "$PLATFORM_REPO" \
             --repo-deploy-releases   "$PLATFORM_REPO" \
             --repo-deploy-snapshots  "$PLATFORM_REPO"
-      # 这步才在 ./package 下构建
       - name: Build with Maven
         run: |
-          jf mvn -version
           jf mvn -B -U -DskipTests install
