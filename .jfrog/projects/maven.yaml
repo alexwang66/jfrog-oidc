@@ -2,10 +2,10 @@ version: 1
 type: maven
 resolver:
     serverId: default-server
-    snapshotRepo: alex-maven-virtual
-    releaseRepo: alex-maven-virtual
+    snapshotRepo: alex-libs-release
+    releaseRepo: alex-libs-release
 deployer:
     serverId: default-server
-    snapshotRepo: alex-maven-virtual
-    releaseRepo: alex-maven-virtual
+    snapshotRepo: alex-libs-release
+    releaseRepo: alex-libs-release
 useWrapper: true
