@@ -37,9 +37,7 @@ jobs:
       - name: Configure Maven (global)
         working-directory: .
         run: |
-          jf mvnc --global=true \
-            --server-id-resolve default-server \
-            --server-id-deploy  default-server \
+          jf mvnc \
             --repo-resolve-releases  "$PLATFORM_REPO" \
             --repo-resolve-snapshots "$PLATFORM_REPO" \
             --repo-deploy-releases   "$PLATFORM_REPO" \
