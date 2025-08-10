@@ -26,7 +26,7 @@ jobs:
           cache: maven
 
       - name: Setup JFrog CLI (OIDC)
-        uses: jfrog/setup-jfrog-cli@v3
+        uses: jfrog/setup-jfrog-cli@v4
         env:
           JF_URL: ${{ env.JF_URL }}
         with:
