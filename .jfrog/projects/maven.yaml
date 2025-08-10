@@ -1,11 +1,11 @@
 version: 1
 type: maven
 resolver:
-    serverId: soleng
+    serverId: default-server
     snapshotRepo: alex-maven-virtual
     releaseRepo: alex-maven-virtual
 deployer:
-    serverId: soleng
+    serverId: default-server
     snapshotRepo: alex-maven-virtual
     releaseRepo: alex-maven-virtual
 useWrapper: true
