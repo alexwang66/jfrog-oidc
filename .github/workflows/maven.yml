@@ -13,6 +13,7 @@ jobs:
       OIDC_AUDIENCE: 'jfrog-oidc'
       OIDC_PROVIDER: 'alex-github'
       PLATFORM_REPO: 'alex-libs-release'
+      JF_URL: ${{ secrets.JF_URL }}
      defaults:
       run:
         working-directory: ./package
