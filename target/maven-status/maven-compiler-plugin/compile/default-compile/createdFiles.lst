@@ -1,6 +1,0 @@
-com/example/jfrog/demo/ServletInitializer.class
-com/example/jfrog/demo/LogParser.class
-com/example/jfrog/demo/Analysis.class
-com/example/jfrog/demo/LogEntry.class
-com/example/jfrog/demo/DemoApplication.class
-com/example/jfrog/demo/repository/LogEntryRepository.class
